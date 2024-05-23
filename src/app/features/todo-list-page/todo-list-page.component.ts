@@ -1,13 +1,9 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { injectAllTodos } from '../../store/todo/todo.selectors';
-import { AsyncPipe, JsonPipe } from '@angular/common';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { AsyncPipe } from '@angular/common';
 import { addTodoWithAutoIdFn } from '../../store/todo/todo.actions';
+import { TodoCreateInputComponent } from '../shared/todo-create-input/todo-create-input.component';
+import { TodoCardContainerComponent } from '../containers/todo-card-container/todo-card-container.component';
 
 @Component({
   selector: 'app-todo-list-page',
@@ -15,23 +11,18 @@ import { addTodoWithAutoIdFn } from '../../store/todo/todo.actions';
   styleUrls: ['todo-list-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [AsyncPipe, JsonPipe, ReactiveFormsModule],
+  imports: [
+    AsyncPipe,
+    TodoCardContainerComponent,
+    TodoCreateInputComponent,
+  ],
 })
 export class TodoListPageComponent {
-
-  form = new FormGroup({
-    name: new FormControl('', Validators.required),
-  });
-
   todos$ = injectAllTodos();
 
   addTodoWithAutoId = addTodoWithAutoIdFn();
 
-  submit() {
-    if (this.form.invalid) {
-      return;
-    }
-
-    this.addTodoWithAutoId({ name: this.form.value.name! });
+  submit(item: { name: string }) {
+    this.addTodoWithAutoId(item);
   }
 }

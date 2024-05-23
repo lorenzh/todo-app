@@ -1,0 +1,3 @@
+:host {
+    @apply mx-auto block max-w-screen-lg p-4;
+}

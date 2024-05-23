@@ -1,8 +1,8 @@
-<form [formGroup]="form" (ngSubmit)="submit()">
 
-    <input type="text" formControlName="name">
-    <button type="submit">Save</button>
+<app-todo-create-input (save)="submit($event)"></app-todo-create-input>
 
-</form>
-
-<pre>{{ todos$ | async | json }}</pre>
+<div class="grid grid-flow-row gap-2 mt-8">
+  @for (todo of todos$ | async; track todo.id) {
+    <app-todo-card-container [todo]="todo"></app-todo-card-container>
+  }
+</div>

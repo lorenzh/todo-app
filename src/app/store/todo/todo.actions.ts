@@ -16,4 +16,11 @@ export function addTodoWithAutoIdFn() {
 
 export const patchTodo = createAction(`${prefix} Patch Todo`, props<{ id: number, changes: Partial<TodoEntity> }>());
 
+export function updateDescriptionFn() { 
+    const store = inject(Store);
+
+    return (data: {id: number, description: string }) =>
+    store.dispatch(patchTodo({ id: data.id, changes: { description: data.description } }));
+}
+
 export const removeTodo = createAction(`${prefix} Remove Todo`, props<{ id: number }>());
