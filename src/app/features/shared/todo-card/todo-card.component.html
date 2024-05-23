@@ -1,6 +1,10 @@
 <div class="card bg-base-100 shadow-xl card-bordered">
-    <div class="card-body">
-      <h2 class="card-title">{{ todo.name }}</h2>
-      <textarea class="textarea" [ngModel]="todo.description ?? ''" (ngModelChange)="descriptionChange.emit($event)"></textarea>
-    </div>
+  <div class="card-body">
+    <h2 class="card-title">{{ todo.name }}</h2>
+    <textarea
+      class="textarea"
+      [ngModel]="todo.description ?? ''"
+      (ngModelChange)="descriptionChange.emit($event)"
+    ></textarea>
   </div>
+</div>
